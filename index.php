@@ -34,6 +34,8 @@
                         $textt = $textt.'<div class="unitAes"> <div class="unitNameCount">'.$arrBlocksFull[$i][0].'<span class="spanCountBlocks">'.stan($arrBlocksFull[$i][0])[1].'</span></div><div class="power"><span class="powerText">'.stan($arrBlocksFull[$i][0])[2].' МВт.</span></div></div>';
                 }
                 print_r($textt);
+
+                
             ?>
 
 

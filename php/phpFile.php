@@ -59,6 +59,8 @@ function stan($station){                                      //функція �
 	$arrFinish  = array($countBlocks, $countWorkBlocks, $allPower);
 	return $arrFinish;
 }	
+
+
 						
 							
 ?>
