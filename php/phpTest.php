@@ -1,5 +1,15 @@
 <?php
+
+   header('Access-Control-Allow-Origin: *');
+
    include './phpFile.php';
+   $arr;
+for($i = 4; $i < count($arrBlocksFull); $i++ ){
+   $arr[$i][0] = $arrBlocksFull[$i][0];
+   $arr[$i][1] = stan($arrBlocksFull[$i][0])[1];
+   $arr[$i][2] = stan($arrBlocksFull[$i][0])[2];
+}
+
 
    $textt = '';
    for($i = 4; $i < count($arrBlocksFull); $i++ ){
@@ -35,5 +45,8 @@
         echo $textt3;
     }
 
+    if($_GET['act'] == '5'){
+        echo json_encode($arr);
+    }
 
-?>
+?>					
