@@ -11,7 +11,7 @@
     border: 2px solid black;
     
 }
-.containerAes, .containerTes{
+.containerAes, .containerTes, .containerFoot{
     width: 95%;
     min-height: 10px;
     margin: 5px;
@@ -22,6 +22,7 @@
     background-color: steelblue;
    
 }
+
 .unitAes{
     min-width: 80px;
     height: 40px;
@@ -49,4 +50,27 @@
 } */
 .containerAes{
     background-color: darkslategrey;
+}
+.containerFoot{
+    background-color: black;
+    color: white;
+
+}
+a {
+    text-decoration: none;
+}
+  a:link {
+    color: white;
+    
+}
+a:visited {
+    color: white;
+}
+a:hover {
+    color: rgb(92, 238, 87); 
+    
+}
+a:active {
+    color: #497DDD; 
+    border-bottom: 1px dashed;
 }
