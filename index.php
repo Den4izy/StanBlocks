@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- <link rel="stylesheet" type="text/css" href="http://qwertyfour.zzz.com.ua/css/style.css?ts=<?=time()?>" /> -->
+    <link rel="stylesheet" type="text/css" href="http://qwertyfour.zzz.com.ua/css/style.css?ts=<?=time()?>" />
 
-    <link rel="stylesheet" href="./css/style.css">
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
     
     <title>Стан блоків</title>
 </head>
@@ -41,7 +41,7 @@
         </div>
         <div class="containerFoot">
             <div class="statistik">
-                <a id="stat" href="./pages/statistik/stat.html">Статистика</a>
+                <a id="stat" href="./pages/statistik/stat.php">Статистика</a>
             </div>
         </div>
 

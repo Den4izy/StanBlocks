@@ -1,6 +1,8 @@
 #bod{
     margin: 0 auto;
     width: 70%;
+    background-color: thistle;
+    background-color:rgb(215, 235, 243);
 }
 .unit{
    
@@ -9,26 +11,28 @@
     margin-bottom: 5px;
     width: 100%;
     display: flex;
+    background-color:rgb(215, 235, 243);
     
 }
 
 .name{
 
-    background-color: orangered;
-    font-size: 14pt;
+   
+    font-size: 12pt;
     font-family: sans-serif;
-    width: 100px;
-    min-width: 100px;
+    width: 80px;
+    min-width: 80px;
     border-radius: 5px 0 0 5px;
 }
 .power{
 
-    background-color: orangered;
-    text-align: right;
-    font-size: 14pt;
+    
+    
+    font-size: 12pt;
     font-family: sans-serif;
-    width: 100px;
-    min-width: 100px;
+    width: 50px;
+    min-width: 50px;
+    font-weight: 900;
 }
 .contScall{
    width: 100%;
@@ -36,19 +40,37 @@
 }
 .scall{
 
-    background-color: green;
+    background-color:rgb(215, 235, 243);
+    background-color: tomato;
     border-radius: 0 5px 5px 0;
     height: 100%;
+    animation-name: anim;
+    animation-duration: 2s;
    
+}
+@keyframes anim{
+    from{
+        width: 0px;
+    }
+    to{
+        
+        
+    }
 }
 #sum{
 
     background-color: green;
+    background-color: tomato;
     border-radius: 5px;
-    font-size: 20pt;
+    font-size: 16pt;
     font-family: sans-serif;
     margin-bottom: 10px;
     text-align: center;
     width: 100%;
    
 }
+@media screen and (max-width: 600px) {
+    #bod {
+        width: 95%;
+    }
+  }

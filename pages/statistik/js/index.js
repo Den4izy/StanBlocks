@@ -32,12 +32,16 @@ function func(data) {
     }
     if (docCE.checked) {
         arrNorm = arrCE(arrNorm);
-
+    }
+    if (docTets.checked) {
+        arrNorm = arrTes(arrNorm);
     }
     let maximum = max(arrNorm);
+    console.log(maximum);
     bubbleSort(arrNorm);
     doc.innerHTML = out(maximum, arrNorm);
-    docSum.innerHTML = 'Потужність ТЕС та ТЕЦ: <b>' + sum(arrNorm) + '</b>';
+    docSum.innerHTML = 'Потужність: <b>' + sum(arrNorm) + 'МВт.</b>';
+
 
 
 }
@@ -72,6 +76,21 @@ function arrCE(arr) {
             ar.push(arr[i]);
         }
     }
+    console.log(ar);
+    return ar;
+}
+
+function arrTes(arr) {
+    let ar = [];
+    for (let i = 0, k = 0; i < arr.length; i++, k++) {
+        if (arr[i][0] == 'КТЕЦ-5' || arr[i][0] == 'КТЕЦ-6' || arr[i][0] == 'ХТЕЦ-5') {
+            k = k - 1;
+            continue
+        } else {
+            ar[k] = arr[i];
+        }
+    }
+    console.log(ar);
     return ar;
 }
 
