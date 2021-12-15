@@ -10,10 +10,10 @@
 
 
 
-    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="./css/style.css">
 
-    <link rel="stylesheet" type="text/css"
-        href="http://qwertyfour.zzz.com.ua/pages/statistik/css/style.css?ts=<?=time()?>" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://qwertyfour.zzz.com.ua/pages/statistik/css/style.css?ts=<?=time()?>" /> -->
+       
 
 
 
