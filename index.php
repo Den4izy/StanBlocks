@@ -42,6 +42,7 @@
         <div class="containerFoot">
             <div class="statistik">
                 <a class="a" href="./pages/statistik/stat.php">Статистика</a>
+                <a class="a" href="./pages/hour/site.php">Почасовка</a>
                 <a class="a" href="./test.html">test</a>
             </div>
         </div>

@@ -1,0 +1,11 @@
+*{
+    font-size: 8pt;
+}
+td{
+    border: 1px solid black;
+    
+}
+.stroke{
+    color: red;
+    margin-bottom: 15px;
+}
