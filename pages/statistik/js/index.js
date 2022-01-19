@@ -1,5 +1,7 @@
-let v = 0;
+let v = 1;
 let timeDiv = document.getElementById('timeNow');
+let timeStan = document.getElementById('timeStan');
+
 function go(dat) {
     let xht = new XMLHttpRequest();
     docBuTes = document.getElementById('buTes');
@@ -16,6 +18,7 @@ function go(dat) {
 
         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=1", true);
         v = 1;
+        timeStan.innerHTML = '';
     }
     if (dat == 2) {
 
@@ -30,10 +33,17 @@ function go(dat) {
         console.log(res[0]);
         console.log(res[1]);
 
+        console.log(docTextTime.value);
 
-
-        xht.open("GET", "http://localhost/www/Projects/stanBlocksWork/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
         v = 3;
+        if (docTextTime.value == '') {
+            timeStan.innerHTML = "Спробуй ще!";
+        }
+        else {
+            timeStan.innerHTML = 'Станом на ' + res[0] + ' ' + res[1];
+        }
+
     }
 
 
@@ -41,7 +51,7 @@ function go(dat) {
     xht.send();
 
 }
-go(1);
+go(v);
 setInterval(time, 1000);
 
 

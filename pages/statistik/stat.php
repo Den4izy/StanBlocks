@@ -30,6 +30,7 @@
         <input id="textTime" type="text" placeholder="дд:мм:гггг_чч:00" title="дд:мм:гггг_чч:00" value="">
         <input id="butOK" type="button" value="OK" onclick="go(3)">
         <div id="timeNow"></div>
+        <div id="timeStan"></div>
 
     </div>
 
@@ -39,7 +40,7 @@
         <input id="buTes" type="checkbox" checked>БуТЕС
         <input id="CE" type="checkbox">ЦЕ
         <input id="Tets" type="checkbox">ТЕC
-        <input type="button" value="GO" onclick="go(1)">
+        <input type="button" value="GO" onclick="go(v)">
     </div>
     <script defer src="./js/index.js"></script>
 </body>

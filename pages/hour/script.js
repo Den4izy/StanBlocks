@@ -1,47 +1,48 @@
 let container = document.querySelector('.container');
-function go(data){
+let check = document.getElementById('check');
+function go(data) {
     let xht = new XMLHttpRequest();
-   
-    xht.onreadystatechange = function () {
-         if (this.readyState == 4 && this.status == 200) {
-             func(this.responseText);
-         }
-    }
-    if(data == 1){
-         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=1", true);
-    }
-    if(data == 3){
-         let docTextTime = document.getElementById('text');
-         let res = docTextTime.value.split('_');
-         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
-       
-    }
-    if(data == 4){
-         let docTextTime = document.getElementById('text');
-         let res = docTextTime.value;
-         let check = document.getElementById('check');
-         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
-       
-    }
-    if(data == 5){
-         
-         let dat = new Date();
-         let day = dat.getDate();
-         let month = dat.getMonth() + 1;
-         let year = dat.getFullYear();
-         if (day < 10) {
-             day = '0' + day;
-         }
-         if (month < 10) {
-             month = '0' + month;
-         }
-         
-         let res = day + "." + month + "." + year;
 
-         xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
-         let docTextTime = document.getElementById('text');
-         docTextTime.value = res;
-       
+    xht.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            func(this.responseText);
+        }
+    }
+    if (data == 1) {
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=1", true);
+    }
+    if (data == 3) {
+        let docTextTime = document.getElementById('text');
+        let res = docTextTime.value.split('_');
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
+
+    }
+    if (data == 4) {
+        let docTextTime = document.getElementById('text');
+        let res = docTextTime.value;
+
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
+
+    }
+    if (data == 5) {
+
+        let dat = new Date();
+        let day = dat.getDate();
+        let month = dat.getMonth() + 1;
+        let year = dat.getFullYear();
+        if (day < 10) {
+            day = '0' + day;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        let res = day + "." + month + "." + year;
+
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=4&data=" + res, true);
+        let docTextTime = document.getElementById('text');
+        docTextTime.value = res;
+
     }
     xht.send();
 }
@@ -58,7 +59,7 @@ function func(data) {
 
 
     let Arr2 = [];
-    for(let i = 0; i < Arr.length; i++){
+    for (let i = 0; i < Arr.length; i++) {
         Arr2[i] = arrOffAes(Arr[i]);
     }
 
@@ -66,7 +67,7 @@ function func(data) {
 
 
     let Arr3 = [];
-    for(let i = 0; i < Arr2.length; i++){
+    for (let i = 0; i < Arr2.length; i++) {
         Arr3[i] = arrTes(Arr2[i]);
     }
 
@@ -76,16 +77,16 @@ function func(data) {
     console.log(Arr3);
     //Arr = arrOffAes(Arr);
     //Arr = arrTes(Arr);
-    
+
 
     container.innerHTML = out(Arr3);
 }
 
 //go(4);
 
-function arrOffAes(arr){
+function arrOffAes(arr) {
     let ar = [];
-    for(let i = 4; i <arr.length;i++){
+    for (let i = 4; i < arr.length; i++) {
         ar.push(arr[i]);
     }
     return ar;
@@ -104,12 +105,12 @@ function arrTes(arr) {
     return ar;
 }
 
-function out(arr){
+function out(arr) {
     let text = '<table>';
 
     text += '<tr class="tableName">';
-    if(check.checked == true){
-         text += '<td class="hour">Год.</td>';
+    if (check.checked == true) {
+        text += '<td class="hour">Год.</td>';
     }
     text += '<td colspan="3">ЛуТЕС</td>';
     text += '<td> </td><td> </td><td> </td>';
@@ -128,73 +129,77 @@ function out(arr){
     text += '<td colspan="3">ДобТЕС</td>';
     text += '</tr>';
 
-    for(let iHour = 0; iHour < arr.length; iHour++){
+    if (arr.length == 0) {
+        text += '<tr class="tableName"><td colspan="44">Дані відсутні. Можливо введений час був раніше 06.01.22р., або пізніше поточного часу. Також зверніть увагу на правильність формату заповнення(чч.мм.рррр_гг:00) хвилини ставимо завжди 00.</td></tr></table>';
+    }
+
+    for (let iHour = 0; iHour < arr.length; iHour++) {
         let time = (iHour + 1) * 1;
-       
+
         text += '<tr>';
-        if(check.checked == true){
+        if (check.checked == true) {
             text += '<td class="hour">' + time + '</td>';
         }
-        for(let i = 0; i < arr[iHour].length; i++){
-           
-            
-            if(i == 1){
+        for (let i = 0; i < arr[iHour].length; i++) {
+
+
+            if (i == 1) {
                 text += '<td> </td><td> </td><td> </td>';
             }
-            if(i == 2){
+            if (i == 2) {
                 text += '<td> </td><td> </td><td> </td>';
-            
+
             }
-            if(i == 4){
+            if (i == 4) {
                 text += '<td> </td><td> </td><td> </td>';
-            
+
             }
-            text += '<td>'+ arr[iHour][i][2] + '</td><td>';
-            if(Number(arr[iHour][i][1])){
+            text += '<td>' + arr[iHour][i][2] + '</td><td>';
+            if (Number(arr[iHour][i][1])) {
 
 
-                    if(arr[iHour][i][2] == 0){
-                        text += 0  + '</td><td>';
-                    }
-                    else{
-                          text += arr[iHour][i][1]  + '</td><td>';
-                    }
+                if (arr[iHour][i][2] == 0) {
+                    text += 0 + '</td><td>';
+                }
+                else {
+                    text += arr[iHour][i][1] + '</td><td>';
+                }
 
 
-               
-            }else{
+
+            } else {
                 let sp = arr[iHour][i][1].split('+');
-                text += Number(sp[1]) + Number(sp[0])  + '</td><td>';
+                text += Number(sp[1]) + Number(sp[0]) + '</td><td>';
             }
 
 
-            if(arr[iHour][i][2] == 0){
-                text += 0  + '</td>';
+            if (arr[iHour][i][2] == 0) {
+                text += 0 + '</td>';
             }
-            else{
-                 
+            else {
 
 
 
-                for(let k = 3; k < arr[iHour][i].length; k++){       
-                    if(arr[iHour][i][k][1] == 'd'){
-                        if(arr[iHour][i][k][2] == 'py_v' && arr[iHour][i][k][4] != 'py_n'){
+
+                for (let k = 3; k < arr[iHour][i].length; k++) {
+                    if (arr[iHour][i][k][1] == 'd') {
+                        if (arr[iHour][i][k][2] == 'py_v' && arr[iHour][i][k][4] != 'py_n') {
                             text += arr[iHour][i][k][0] + 'A,';
                         }
-                        if(arr[iHour][i][k][2] != 'py_v' && arr[iHour][i][k][4] == 'py_n'){
+                        if (arr[iHour][i][k][2] != 'py_v' && arr[iHour][i][k][4] == 'py_n') {
                             text += arr[iHour][i][k][0] + 'Б,';
                         }
-                        if(arr[iHour][i][k][2] == 'py_v' && arr[iHour][i][k][4] == 'py_n'){
-                        text += arr[iHour][i][k][0] + ',';
+                        if (arr[iHour][i][k][2] == 'py_v' && arr[iHour][i][k][4] == 'py_n') {
+                            text += arr[iHour][i][k][0] + ',';
                         }
-                    }else{
-              
-                        if(Number(arr[iHour][i][k][2])){
+                    } else {
+
+                        if (Number(arr[iHour][i][k][2])) {
                             text += arr[iHour][i][k][0] + ',';
                         }
                     }
                 }
-       
+
                 text = text.slice(0, -1)
             }
             text += '</td>';

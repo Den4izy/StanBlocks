@@ -274,17 +274,12 @@ if($_GET['act'] == '2'){
 }
 
 if($_GET['act'] == '3'){
-	echo json_encode(createArr(DBZapros($_GET['data'], $_GET['time'])));
-        //echo $_GET['data'].' + '.$_GET['time'];
-        //echo DBZapros($_GET['data'], $_GET['time']);
-	
+	echo json_encode(createArr(DBZapros($_GET['data'], $_GET['time']))); // вертає масів станцій json за поточну годину
 }
+
+
 if($_GET['act'] == '4'){
-	echo json_encode(createArrDay(DBZaprosDay($_GET['data'])));
-        //echo json_encode(DBZaprosDay($_GET['data']));
-        //echo $_GET['data'].' + '.$_GET['time'];
-        //echo DBZapros($_GET['data'], $_GET['time']);
-	
+	echo json_encode(createArrDay(DBZaprosDay($_GET['data'])));          // вертає масів станцій json за поточну добу
 }							
 							
 ?>		
