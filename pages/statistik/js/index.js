@@ -1,34 +1,67 @@
-function go() {
+let v = 0;
+let timeDiv = document.getElementById('timeNow');
+function go(dat) {
     let xht = new XMLHttpRequest();
     docBuTes = document.getElementById('buTes');
     docCE = document.getElementById('CE');
     docTets = document.getElementById('Tets');
+
     xht.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             func(this.responseText);
         }
     }
 
-    xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpTest.php?act=5", true);
+    if (dat == 1) {
+
+        xht.open("GET", "http://qwertyfour.zzz.com.ua/php/phpFileGet.php?act=1", true);
+        v = 1;
+    }
+    if (dat == 2) {
+
+        xht.open("GET", "http://localhost/www/Projects/stanBlocksWork/php/phpFileGet.php?act=2", true);
+    }
+    if (dat == 3) {
+        docTextTime = document.getElementById('textTime');
+
+        let res = docTextTime.value.split('_');
+
+
+        console.log(res[0]);
+        console.log(res[1]);
+
+
+
+        xht.open("GET", "http://localhost/www/Projects/stanBlocksWork/php/phpFileGet.php?act=3&data=" + res[0] + "&time=" + res[1], true);
+        v = 3;
+    }
+
 
 
     xht.send();
 
 }
+go(1);
+setInterval(time, 1000);
 
 
-go();
+
+
+
+
 
 
 let doc = document.getElementById('main');
 let docSum = document.getElementById('sum');
+
+
+
+
 function func(data) {
     fullArr = JSON.parse(data);
-    let arrNorm = normArr(fullArr);
-    console.log(docBuTes.checked);
+    let arrNorm = fullArr;
     if (docBuTes.checked == false) {
         arrNorm = arrOffButes(arrNorm);
-        console.log('ccc');
     }
     if (docCE.checked) {
         arrNorm = arrCE(arrNorm);
@@ -37,7 +70,6 @@ function func(data) {
         arrNorm = arrTes(arrNorm);
     }
     let maximum = max(arrNorm);
-    console.log(maximum);
     bubbleSort(arrNorm);
     doc.innerHTML = out(maximum, arrNorm);
     docSum.innerHTML = 'Потужність: <b>' + sum(arrNorm) + 'МВт.</b>';
@@ -46,19 +78,12 @@ function func(data) {
 
 }
 
-function normArr(arr) {                      //Робить зручний масів для роботи
-    let arrN = [];
-    for (let i = 4; i < 19; i++) {
-        arrN[i - 4] = arr[i];
-    }
-    return arrN;
 
-}
 
 function arrOffButes(arr) {                               //робить масів без БуТЕС
     let ar = [];
     for (let i = 0, k = 0; i < arr.length; i++, k++) {
-        if (i == 13) {
+        if (arr[i][0] == 'БуТЕС') {
             k = k - 1;
             continue
         } else {
@@ -66,6 +91,7 @@ function arrOffButes(arr) {                               //робить мас�
         }
 
     }
+    console.log(ar);
     return ar;
 }
 
@@ -83,7 +109,7 @@ function arrCE(arr) {
 function arrTes(arr) {
     let ar = [];
     for (let i = 0, k = 0; i < arr.length; i++, k++) {
-        if (arr[i][0] == 'КТЕЦ-5' || arr[i][0] == 'КТЕЦ-6' || arr[i][0] == 'ХТЕЦ-5') {
+        if (arr[i][0] == 'КТЕЦ-5' || arr[i][0] == 'КТЕЦ-6' || arr[i][0] == 'ХТЕЦ-5' || arr[i][0] == 'ЗАЕС' || arr[i][0] == 'ЮУАЕС' || arr[i][0] == 'ХАЕС' || arr[i][0] == 'РАЕС') {
             k = k - 1;
             continue
         } else {
@@ -137,6 +163,25 @@ function sum(arr) {                                       //Загальна с�
         summ += Number(arr[i][2]);
     }
     return summ;
+}
+function time() {
+    let dat = new Date();
+    let hour = dat.getHours();
+    let min = dat.getMinutes();
+    let sec = dat.getSeconds();
+    if (hour < 10) {
+        hour = '0' + hour;
+    }
+    if (min < 10) {
+        min = '0' + min;
+    }
+    if (sec < 10) {
+        sec = '0' + sec;
+    }
+    let time = hour + ':' + min + ':' + sec;
+    timeDiv.innerHTML = time;
+
+
 }
 
 

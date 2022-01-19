@@ -3,6 +3,7 @@
     width: 70%;
     background-color: thistle;
     background-color:rgb(215, 235, 243);
+   
 }
 .unit{
    
@@ -48,7 +49,15 @@
     animation-duration: 2s;
    
 }
-
+@keyframes anim{
+    from{
+        width: 0px;
+    }
+    to{
+        
+        
+    }
+}
 #sum{
 
     background-color: green;
@@ -59,30 +68,10 @@
     margin-bottom: 10px;
     text-align: center;
     width: 100%;
-    animation-name: anim2;
-    animation-duration: 2s;
    
 }
 @media screen and (max-width: 600px) {
     #bod {
         width: 95%;
     }
-  }
-
-@keyframes anim{
-    from{
-        width: 0px;
-    }
-    to{
-        
-    }
-}
-@keyframes anim2{
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 0.9;
-        
-    }
-}
+  }	

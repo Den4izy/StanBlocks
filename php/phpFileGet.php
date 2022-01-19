@@ -26,6 +26,7 @@ $arrBlocksFull = array(
 
 $borgs=file_get_contents( "https://disp.ua.energy/Blocksf/" );
 $text = iconv('WINDOWS-1251', 'UTF-8', $borgs);
+$testVar = $text;
 function stan($station){                                      //функція з пареметром назва станції
 	global $arrBlocksFull;		//Массів станцій
 	global $text;
@@ -147,17 +148,143 @@ function allStations2(){
 }
 
 
-function debug_to_console2($data) {
-	$output = $data;
-	if (is_array($output))
-		$output = implode(',', $output);
-			
-	echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+
+function DBZapros($data, $time){
+	$link = mysqli_connect("localhost", "denysyz", "Wiwelden132435", "qwertyfour");
+	$textZ = '';
+        if ($link == false){
+            $result2 = "Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error();
+        }
+	else{
+            $result2 = "This OK";
+        }
+        $sql = 'SELECT Info FROM StanBlocks WHERE Date="'.$data.'" AND Time="'.$time.'"';
+	$result = mysqli_query($link, $sql);
+	$result = mysqli_fetch_assoc($result);
+	$result = $result['Info'];
+	mysqli_close($link);
+        
+	return $result;
 }
+
+function DBZaprosDay($data){
+	$link = mysqli_connect("localhost", "denysyz", "Wiwelden132435", "qwertyfour");
+	$arr = array(); ;
+        if ($link == false){
+            $result2 = "Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error();
+        }
+	else{
+            $result2 = "This OK";
+        }
+        $sql = 'SELECT Info FROM StanBlocks WHERE Date="'.$data.'"';
+	$result = mysqli_query($link, $sql);
+	//$result = mysqli_fetch_array($result);
+        $i = 0;
+       
+        //for($i = 0;i < count($result); $i++){
+        //     $arr[$i] = $result[$i]['Info'];
+        //}
+
+        while ($res = mysqli_fetch_array($result)) {
+             $arr[] = $res['Info'];
+        }
+
+        
+        
+	//$result = $result['Info'];
+	mysqli_close($link);
+        
+	return $arr;
+}
+
+function createArrDay($data){
+        $arr = array();
+        for($i = 0;$i < count($data);$i++){
+            $arr[$i] = createArr($data[$i]);
+        }
+        return $arr;
+}
+
+function createArr($data){
+	$arrFull = array();
+	$arrStation = array();
+	$arrStation = explode(',', $data);
+	$k = 1;
+	$arrSt = array();
+	for($kinf = 0, $full = 0; $k < count($arrStation) ;$full++){
+		$arrSt[$kinf] = $arrStation[$k];			
+		$k = $k +1;
+		$kinf = $kinf +1;
+		$arrSt[$kinf] = $arrStation[$k];            
+		$k = $k +1;
+		$kinf = $kinf +1;
+		$arrSt[$kinf] = $arrStation[$k];
+		$k = $k +1;
+		$kinf = 0;
+		for($i = 0, $kbl = 3; (is_numeric($arrStation[$k]));$kbl++){
+			if(is_numeric($arrStation[$k])){      
+				$arrSt[$kbl][$i] = $arrStation[$k];     
+				$k = $k +1;
+				$i = $i +1;
+				$arrSt[$kbl][$i] = $arrStation[$k];     
+				$i = $i +1;
+				if($arrStation[$k] == 'm'){               
+					$k = $k +1;  
+					$arrSt[$kbl][$i] = $arrStation[$k];     
+					$k = $k +1;                         
+					$i = $i +1;
+					$i = 0;	
+				}else{
+					$k = $k +1;  
+					$arrSt[$kbl][$i] = $arrStation[$k];           
+					$k = $k +1;                         
+					$i = $i +1;
+					$arrSt[$kbl][$i] = $arrStation[$k];          
+					$k = $k +1;                         
+					$i = $i +1;
+					$arrSt[$kbl][$i] = $arrStation[$k];         
+					$k = $k +1;                         
+					$i = $i +1;
+					$i = 0;
+				}
+			}else{
+				$i = 0;
+				break;
+			}
+		}
+		$arrFull[$full] = $arrSt;
+		$arrSt = array();
+		$t = $k;
+		if($k >= 401){
+			break;
+		}
+	}
+	return $arrFull;
+}
+
+
+
+
 
 if($_GET['act'] == '1'){
 	echo json_encode(allStations2());
 }
-						
+if($_GET['act'] == '2'){
+	echo $text;
+}
+
+if($_GET['act'] == '3'){
+	echo json_encode(createArr(DBZapros($_GET['data'], $_GET['time'])));
+        //echo $_GET['data'].' + '.$_GET['time'];
+        //echo DBZapros($_GET['data'], $_GET['time']);
+	
+}
+if($_GET['act'] == '4'){
+	echo json_encode(createArrDay(DBZaprosDay($_GET['data'])));
+        //echo json_encode(DBZaprosDay($_GET['data']));
+        //echo $_GET['data'].' + '.$_GET['time'];
+        //echo DBZapros($_GET['data'], $_GET['time']);
+	
+}							
 							
-?>
+?>		

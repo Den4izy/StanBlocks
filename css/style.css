@@ -56,21 +56,21 @@
     color: white;
 
 }
-.a {
+a {
     text-decoration: none;
 }
-  .a:link {
+  a:link {
     color: white;
     
 }
-.a:visited {
+a:visited {
     color: white;
 }
-.a:hover {
+a:hover {
     color: rgb(92, 238, 87); 
     
 }
-.a:active {
+a:active {
     color: #497DDD; 
     border-bottom: 1px dashed;
 }

@@ -1,11 +1,28 @@
 *{
-    font-size: 8pt;
+   margin: 0;
 }
+body{
+   
+}
+
+table {
+    margin: auto;
+   }
 td{
     border: 1px solid black;
-    
+
 }
-.stroke{
+.hour{
     color: red;
-    margin-bottom: 15px;
+   
 }
+#divForm{
+    background: green;
+    height: 20px;
+    padding: 10px;
+    padding-left: 50px;
+}
+.tableName{
+    background: DeepSkyBlue;
+    text-align: center;
+}	
